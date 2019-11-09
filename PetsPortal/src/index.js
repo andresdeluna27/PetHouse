@@ -6,15 +6,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Landing from './scenes/Landing'
+import {createStore,applyMiddleware}from 'redux'
+import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+import rootReducer from './services/redux/reducer/index.js'
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
-
+const store = createStore(rootReducer, applyMiddleware(thunk))
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <Landing />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   rootElement);
 
 registerServiceWorker();
