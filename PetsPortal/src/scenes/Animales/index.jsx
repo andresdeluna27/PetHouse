@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Card from '../../components/Cards'
-import { Row, Col } from 'reactstrap'
-import { Dropdown } from 'react-bootstrap'
+import { Row, Col, Input } from 'reactstrap'
 import { relative } from 'path';
+import Select from './animalSelector'
 
 class Animales extends Component {
     constructor(props) {
@@ -13,32 +13,45 @@ class Animales extends Component {
         }
     }
     generateCards = () => {
+        const adoptarBoton = (id) =>
+            this.adoptar(id)
+
         let element = []
         let rows = []
         for (let i = 0; i < 3; i++) {
-            rows = [<Col lg='3'><Card key={i + 'card'} title={this.state.titulo + i} /></Col>]
+            rows = [<Col lg='3'><Card 
+            items={[{valor:'tipo'}]} 
+            key={i + 'card'} 
+            title={this.state.titulo + i} 
+            adoptar={adoptarBoton}
+            /></Col>]
             element = element.concat(rows)
         }
 
         return element
     }
 
-    handleSelect = (val) =>{
+    handleSelect = (val) => {
         this.setState({
-            titulo: val.target.value
+            titulo: val
         })
-        console.log(val)
     }
+
+    generateSelect = () =>{
+        const handleSelectFunc = (val) =>
+            this.handleSelect(val)
+            return <Select handleSelectF={handleSelectFunc}  />
+    }
+
+    adoptar = (id) =>{
+        console.log('adoptar a : '+id)
+    }
+    
     render() {
         return (
             <div>
                 <h1>Animales</h1>
-                <select onChange={e => this.handleSelect(e)}>
-                    <option value='perros'>perros</option>
-                    <option value='gatos'>gatos</option>
-                    <option value='otros'>otros</option>
-                </select>
-                
+                {this.generateSelect()}
                 <Row style={{ pading: '5px' }}>
                     {this.generateCards()}
                 </Row>
