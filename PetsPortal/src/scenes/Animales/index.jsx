@@ -5,7 +5,7 @@ import { relative } from 'path';
 import Select from './animalSelector'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { obtenerAnimales,solicitudAdoptar } from '../../services/redux/animales/animal-action'
+import { obtenerAnimales,solicitudAdoptar,elegirSolicitud } from '../../services/redux/animales/animal-action'
 
 class Animales extends Component {
     constructor(props) {
@@ -80,7 +80,8 @@ class Animales extends Component {
 }
 const actionCreators = {
     obtenerAnimales,
-    solicitudAdoptar
+    solicitudAdoptar,
+    elegirSolicitud
 }
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(actionCreators, dispatch)

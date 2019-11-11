@@ -53,3 +53,14 @@ export const postJsonRequest2 = async (url) => {
     } catch (error) {
     }
 }
+
+export const patchJsonRequest2 = async (url) => {
+    try {
+        let response = await fetch(url, {
+            method: 'PATCH'
+              
+        })
+        if (response.ok) return await response.json()
+    } catch (error) {
+    }
+}

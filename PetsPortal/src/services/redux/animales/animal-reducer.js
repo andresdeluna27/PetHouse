@@ -1,5 +1,6 @@
 let preferencesData = {
-    animals:[]
+    animals:[],
+    solicitudes:[]
 }
 
 const animalsState = (state = preferencesData, action) => {
@@ -15,6 +16,12 @@ const animalsState = (state = preferencesData, action) => {
                 ...state,
                 correcto: action.correcto
             }}
+        case 'GET_SOLICITUDES':{
+            return {
+                ...state,
+                solicitudes: action.solicitudes
+            }
+        }
         default:
             return state
     }
