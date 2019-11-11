@@ -41,6 +41,8 @@ class Admin extends Component {
     getActualForm = () => {
         const agreagarPersonaBtn = () =>
             this.agreagarPersonaForm()
+        const agreagarAnimalBtn = () =>
+            this.agreagarAnimalForm()
         const getValuesFrom = (property, value) =>
             this.getFormValues(property, value)
         return this.state.type === 'persona' ?
@@ -49,7 +51,7 @@ class Admin extends Component {
             (
                 <FormGroup>
                     {this.generateSelect()}
-                    <FormularioA changeValues={getValuesFrom} />
+                    <FormularioA changeValues={getValuesFrom} agregar={agreagarAnimalBtn} />
                 </FormGroup>
             )
     }
@@ -62,15 +64,24 @@ class Admin extends Component {
 
     agreagarPersonaForm = () => {
         let persona = {
-            Id: 1,
-            Nombre: 'Juan',//this.state.nombrePersona
-            ApellidoP: 'PErez',
-            ApellidoM: 'Perez',
-            Edad: 16,
-            Domicilio: 'agapanto #12',
-            CentroId: 2
+            Nombre: this.state.nombre,
+            ApellidoP: this.state.apellidoP,
+            ApellidoM: this.state.apellidoM,
+            Edad:this.state.edadPersona,
+            Domicilio:this.state.domiilio
         }
         this.props.agreagarPersona(persona)
+    }
+
+    agreagarAnimalForm = () => {
+        let animal = {
+            Nombre: this.state.nombre,
+            Raza: this.state.raza,
+            Edad: this.state.edad,
+            Imagen: this.state.imagen,
+            CentroId: 5 //sera random
+        }
+        this.props.agreagarAnimal(animal)
     }
 
     render() {

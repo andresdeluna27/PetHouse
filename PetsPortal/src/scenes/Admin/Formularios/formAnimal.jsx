@@ -17,7 +17,7 @@ const FormAnimal = (props) => {
         <Input type='text' name='imagen' id='imagen' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
       </FormGroup>
-      <Button>Agregar</Button>
+      <Button onClick={e => props.agregar()}>Agregar</Button>
     </Form>
   );
 }
