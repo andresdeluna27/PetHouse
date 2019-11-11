@@ -38,8 +38,8 @@ namespace AnimalsPets.Services.AdopcionService
 
         public int AddPersona(Persona persona)
         {
-            string sql = $@"INSERT INTO Persona (Id , Nombre,ApellidoP,ApellidoM ,Edad , Domicilio ) VALUES 
-                            ({persona.Id}, '{persona.Nombre}', '{persona.ApellidoP}', {persona.ApellidoM},{persona.Edad}, {persona.Domicilio})";
+            string sql = $@"INSERT INTO Persona ( Nombre,ApellidoP,ApellidoM ,Edad , Domicilio ) VALUES 
+                            ( '{persona.Nombre}', '{persona.ApellidoP}', '{persona.ApellidoM}',{persona.Edad}, '{persona.Domicilio}')";
             List<Exception> exceptions = new List<Exception>();
             try
             {
@@ -55,15 +55,22 @@ namespace AnimalsPets.Services.AdopcionService
             return 0;
         }
 
-        public int SolicitudAdopcion(int owner,int animal)
+        public int SolicitudAdopcion(string owner,int animal)
         {
-            string sql = $@"INSERT INTO Solicitudes (Id, OwnerId, AnimalId, Progress, Fecha) VALUES 
-                            (1,{owner}, '{animal}', '{0}', {DateTime.Now})";
+            
+            string ownerId = $@"SELECT Id FROM Persona WHERE Nombre='{owner}'";
             List<Exception> exceptions = new List<Exception>();
             try
             {
                 Conn.Open();
-                SqlCommand command = new SqlCommand(sql, Conn);
+                SqlCommand command = new SqlCommand(ownerId, Conn);
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                int Id = Convert.ToInt32(reader["Id"]);
+                string sql = $@"INSERT INTO Solicitudes ( OwnerId, AnimalId, Progress, Fecha) VALUES 
+                            ({Id}, {animal}, {0}, '{DateTime.Now}')";
+                reader.Close();
+                command.CommandText = sql;
                 command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -73,5 +80,51 @@ namespace AnimalsPets.Services.AdopcionService
             }
             return 0;
         }
+
+        public IEnumerable<Solicitud> GetSolicitudesPorId(int id)
+        {
+            List<Solicitud> res = new List<Solicitud>();
+            string sql = @"SELECT s.*,p.Nombre FROM Solicitudes s
+                            join persona p on p.Id = s.OwnerId
+                            WHERE Progress = 0 And AnimalId = "+id;
+            List<Exception> exceptions = new List<Exception>();
+            try
+            {
+                Conn.Open();
+                SqlCommand command = new SqlCommand(sql, Conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    try
+                    {
+                        res.Add(new Solicitud
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            AnimalId = Convert.ToInt32(reader["AnimalId"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            OwnerId = Convert.ToInt32(reader["OwnerId"]),
+                            Nombre = Convert.ToString(reader["Nombre"])
+                        });
+                    }
+                    catch (Exception e)
+                    {
+                        exceptions.Add(e);
+                    }
+                }
+
+                reader.Close();
+                command.Dispose();
+                Conn.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                exceptions.Add(e);
+            }
+
+            return res;
+        }
+
     }
 }

@@ -11,5 +11,6 @@ namespace AnimalsPets.Services.AnimalService
         IEnumerable<Animal> GetAnimals();
         int AddAnimal(Animal nuevoAmigo);
         void DeleteAnimal(int animalId);
+        IEnumerable<Animal> GetAnimalsPorRaza(string raza);
     }
 }

@@ -13,6 +13,5 @@ namespace AnimalsPets.Models
         public string ApellidoM { get; set; }
         public int Edad { get; set; }
         public string Domicilio { get; set; }
-        public int CentroId { get; set; }
     }
 }

@@ -14,9 +14,9 @@ class HomeCard extends Component {
     }
     render() {
         return (
-            <div className={'card-board '+this.props.className}>
+            <div className={'card-board carta-menu-home cards '+this.props.className}>
                 <Card>
-                    <CardImg top width='100%' src={this.props.imagen} alt='Card image cap' />
+                    <CardImg top width='100%' style={{borderRadius:'3%'}} src={this.props.imagen} alt='Card image cap' />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
                         <CardSubtitle>{this.props.subTitle}</CardSubtitle>

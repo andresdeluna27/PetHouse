@@ -12,5 +12,6 @@ namespace AnimalsPets.Models
         public int AnimalId { get; set; }
         public int Progress { get; set; }
         public DateTime Fecha { get; set; }
+        public string Nombre { get; set; }
     }
 }

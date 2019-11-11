@@ -13,5 +13,6 @@ namespace AnimalsPets.Models
         public int Edad { get; set; }
         public int OwnerId { get; set; }
         public int CentroId { get; set; }
+        public string Imagen { get; set; }
     }
 }

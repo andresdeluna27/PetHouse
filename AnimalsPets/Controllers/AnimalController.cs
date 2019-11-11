@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalsPets.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class AnimalController : ControllerBase
     {
@@ -22,24 +22,32 @@ namespace AnimalsPets.Controllers
 
         // Recupera todos los animales 
         [HttpGet]
-        public IActionResult Get()
+        [Route("api/animal")]
+        public IActionResult GetAll()
         {
             return Ok(_animalService.GetAnimals());
            // return Ok(new string[] { "value1", "value2" });
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet]
+        [Route("api/animal/razas")]
+        public IActionResult GetRazas(string raza)
         {
-            return Ok("value");
+            return Ok(_animalService.GetAnimalsPorRaza(raza));
         }
 
         // Añade un animal nuevo
         [HttpPost]
-        public IActionResult Post([FromBody] Animal amigo)
+        [Route("api/animal")]
+        //public IActionResult Post([FromBody] Animal amigo)
+        public IActionResult Post(string nombre, string raza, int edad, string imagen)
         {
-            int result =_animalService.AddAnimal(amigo);
+            Animal amigo = new Animal()
+            {
+                Nombre = nombre, Raza=raza, Edad=edad, CentroId=5, Imagen=imagen
+            };
+        int result =_animalService.AddAnimal(amigo);
             if (result == 0)
                 return Ok();
             return BadRequest();
@@ -53,6 +61,7 @@ namespace AnimalsPets.Controllers
 
         // Elimina al animal seleccionado
         [HttpDelete("{id}")]
+        [Route("api/animal")]
         public void Delete(int id)
         {
             _animalService.DeleteAnimal(id);

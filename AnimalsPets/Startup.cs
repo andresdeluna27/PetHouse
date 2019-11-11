@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Cors;
 using AnimalsPets.Services.AdopcionService;
 using AnimalsPets.Services.AnimalService;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +40,10 @@ namespace AnimalsPets
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //var config = new HttpConfiguration();
+            //var cors = new EnableCorsAttribute("http://localhost:5901", "*", "*");
+            //config.EnableCors(cors);
+            //app.UseWebApi(config);
             app.UseMvc();
         }
     }

@@ -68,7 +68,7 @@ class Animales extends Component {
     render() {
         console.log('animales', this.props)
         return (
-            <div className='container'>
+            <div className='container fondo-animal'>
                 <h1>Animales</h1>
                 {this.generateSelect()}
                 <div className='row no-gutters row-edge' style={{ pading: '5px' }}>

@@ -62,10 +62,58 @@ namespace AnimalsPets.Services.AnimalService
 
         }
 
+        public IEnumerable<Animal> GetAnimalsPorRaza(string raza)
+        {
+            List<Animal> res = new List<Animal>();
+            string sql = $"Select * From Animal Where Raza= '{raza}'";
+            List<Exception> exceptions = new List<Exception>();
+            try
+            {
+                Conn.Open();
+                SqlCommand command = new SqlCommand(sql, Conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    try
+                    {
+                        res.Add(new Animal
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Nombre = Convert.ToString(reader["Nombre"]),
+                            Raza = Convert.ToString(reader["Raza"]),
+                            Edad = Convert.ToInt32(reader["Edad"]),
+                            OwnerId = Convert.ToInt32(reader["OwnerId"]),
+                            CentroId = Convert.ToInt32(reader["CentroId"]),
+                            Imagen = Convert.ToString(reader["Imagen"])
+                        });
+                    }
+                    catch (Exception e)
+                    {
+                        exceptions.Add(e);
+                    }
+                }
+
+                reader.Close();
+                command.Dispose();
+                Conn.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                exceptions.Add(e);
+            }
+
+            return res;
+
+        }
+
         public int AddAnimal(Animal nuevoAmigo)
         {
-            string sql = $@"INSERT INTO Animal (Id , Nombre,Raza ,Edad ,OwnerId ,CentroId ) VALUES 
-                            ({nuevoAmigo.Id}, '{nuevoAmigo.Nombre}', '{nuevoAmigo.Raza}', {nuevoAmigo.Edad},0, {nuevoAmigo.CentroId})";
+            Random r = new Random();
+            int centro = r.Next(1, 2);
+            string sql = $@"INSERT INTO Animal (Nombre,Raza ,Edad ,OwnerId ,CentroId,Imagen ) VALUES 
+                            ('{nuevoAmigo.Nombre}', '{nuevoAmigo.Raza}', {nuevoAmigo.Edad},0, {centro}, '{nuevoAmigo.Imagen}')";
             List<Exception> exceptions = new List<Exception>();
             try
             {

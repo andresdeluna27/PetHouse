@@ -1,5 +1,5 @@
-.cards{
-    border: solid 1px red;
+.cards-home{
+    border: solid 1px #0088cc;
     text-decoration: none !important;
     color: black;
     background-color: blueviolet;
@@ -8,4 +8,17 @@
 .row-edge{
     margin-left: 0% !important;
     margin-right: 0% !important;
+}
+
+.fondo-home{
+    background-image: linear-gradient(#b3e6ff, white);
+    width: 100% !important; 
+}
+
+.carta-menu{
+    margin: 20px;
+    border-radius: 5%;
+    padding: 5%;
+    text-align: center;
+    font-size: 14pt;
 }

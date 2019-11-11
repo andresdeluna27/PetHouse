@@ -8,6 +8,23 @@
     height: auto;
 }
 
+.carta-menu-home{
+    margin: 10px;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+.cards{
+    border: solid 1px #0088cc;
+    text-decoration: none !important;
+    color: black;
+    background-color: #dcffcc;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: 900;
+}
+
+
 
 
 @media screen and (max-width: 355px) {
