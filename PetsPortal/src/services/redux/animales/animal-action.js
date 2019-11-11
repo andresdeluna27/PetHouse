@@ -1,4 +1,4 @@
-import {getJsonRequest,postJsonRequest} from '../../api/apiCall'
+import {getJsonRequest,postJsonRequest2} from '../../api/apiCall'
 
 export const obtenerAnimales = () =>{
     return async dispatch => {
@@ -24,8 +24,8 @@ export const obtenerAnimales = () =>{
 export const solicitudAdoptar = (body) =>{
     return async dispatch => {
         try {
-            console.log('si llego')
-            let response = await postJsonRequest(`http://localhost:63479/api/adopcion/solicitud`,body)
+            let params=`owner=${body.owner}&animal=${body.animal}`
+            let response = await postJsonRequest2(`http://localhost:63479/api/adopcion/solicitud`)
             await dispatch({
                 type: 'ADD_SOLICITUD',
                 correcto: response

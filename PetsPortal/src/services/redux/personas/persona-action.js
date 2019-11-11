@@ -26,7 +26,7 @@ export const agreagarAnimal = (body) =>{
     return async dispatch => {
         try {
             //console.log('porque ',JSON.stringify(body))
-            let parametro = `nombre=${body.Nombre}&raza=${body.Nombre}&edad=${body.Edad}`
+            let parametro = `nombre=${body.Nombre}&raza=${body.Raza}&edad=${body.Edad}`
             let response = await postJsonRequest2(
                 'http://localhost:63479/api/animal?'+parametro)
             await dispatch({

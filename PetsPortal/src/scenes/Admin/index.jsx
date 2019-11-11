@@ -85,7 +85,7 @@ class Admin extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log('rom ',this.state)
         return (
             <div>
                 <h1>Administrar</h1>
