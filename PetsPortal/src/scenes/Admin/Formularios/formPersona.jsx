@@ -21,7 +21,7 @@ const Formulario = (props) => {
         <Input type='number' name='edadPersona' id='edad' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
       </FormGroup>
-      <Button>Dar de alta</Button>
+      <Button onClick={e => props.agregar()}>Dar de alta</Button>
     </Form>
   );
 }

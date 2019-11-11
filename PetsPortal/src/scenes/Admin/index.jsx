@@ -3,13 +3,23 @@ import FormularioP from './Formularios/formPersona'
 import FormularioA from './Formularios/formAnimal'
 import Selector from '../Animales/animalSelector'
 import { Input, FormGroup, Row, Col } from 'reactstrap'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { agreagarPersona, agreagarAnimal } from '../../services/redux/personas/persona-action'
 
 class Admin extends Component {
     constructor(props) {
         super(props)
         this.state = {
             type: 'persona',
-            raza: 'perro'
+            raza: 'perro',
+            nombrePersona: '',
+            apellidoM:'',
+            apellidoP:'',
+            edadPersona:1,
+            nombre:'',
+            edad:1,
+            imagen:''
         }
     }
 
@@ -29,10 +39,12 @@ class Admin extends Component {
     }
 
     getActualForm = () => {
-        const getValuesFrom = (property,value) =>
-            this.getFormValues(property,value) 
+        const agreagarPersonaBtn = () =>
+            this.agreagarPersonaForm()
+        const getValuesFrom = (property, value) =>
+            this.getFormValues(property, value)
         return this.state.type === 'persona' ?
-            <FormularioP changeValues={getValuesFrom} />
+            <FormularioP changeValues={getValuesFrom} agregar={agreagarPersonaBtn} />
             :
             (
                 <FormGroup>
@@ -42,13 +54,24 @@ class Admin extends Component {
             )
     }
 
-    getFormValues = (property,value) =>{
+    getFormValues = (property, value) => {
         this.setState({
-            [property]:value
+            [property]: value
         })
     }
 
-    
+    agreagarPersonaForm = () => {
+        let persona = {
+            Id: 1,
+            Nombre: 'Juan',//this.state.nombrePersona
+            ApellidoP: 'PErez',
+            ApellidoM: 'Perez',
+            Edad: 16,
+            Domicilio: 'agapanto #12',
+            CentroId: 2
+        }
+        this.props.agreagarPersona(persona)
+    }
 
     render() {
         console.log(this.state)
@@ -75,5 +98,21 @@ class Admin extends Component {
         );
     }
 }
+const actionCreators = {
+    agreagarPersona,
+    agreagarAnimal
+}
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(actionCreators, dispatch)
+}
 
-export default Admin;
+const mapStateToProps = state => {
+    return {
+        persona: state.personaReducer.persona
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Admin)

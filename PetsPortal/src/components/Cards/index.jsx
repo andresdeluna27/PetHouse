@@ -4,6 +4,7 @@ import {
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
 import Solicitud from './solicitud'
+import './cards-animal.css'
 
 class CardGeneric extends Component {
     constructor(props){
@@ -27,9 +28,9 @@ class CardGeneric extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
+            <div className={'card-board '+this.props.className}>
                 <Card>
-                    <CardImg top width='100%' src='/assets/318x180.svg' alt='Card image cap' />
+                    <CardImg top width='100%' src='https://thoughtcatalog.files.wordpress.com/2018/08/dragons.jpg' alt='Card image cap' />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
                         <CardSubtitle>{this.props.subTitle}</CardSubtitle>

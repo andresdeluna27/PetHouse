@@ -3,6 +3,9 @@ import Card from '../../components/Cards'
 import { Row, Col, Input } from 'reactstrap'
 import { relative } from 'path';
 import Select from './animalSelector'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { obtenerAnimales } from '../../services/redux/animales/animal-action'
 
 class Animales extends Component {
     constructor(props) {
@@ -12,21 +15,30 @@ class Animales extends Component {
             titulo: 'perros'
         }
     }
+    componentDidMount() {
+        this.props.obtenerAnimales()
+    }
     generateCards = () => {
         const adoptarBoton = (id) =>
             this.adoptar(id)
 
         let element = []
         let rows = []
-        for (let i = 0; i < 3; i++) {
-            rows = [<Col lg='3'><Card 
-            items={[{valor:'tipo'}]} 
-            key={i + 'card'} 
-            title={this.state.titulo + i} 
-            adoptar={adoptarBoton}
-            /></Col>]
+        let items = this.props.animals !== undefined ? this.props.animals : []
+        items.map(data => {
+            rows = [
+                <Col lg={{ size: 3, offset: 1 }}>
+                    <Card
+                        className='linea'
+                        items={[{ valor: 'tipo' }]}
+                        key={data.id + data.nombre + 'card'}
+                        title={data.nombre}
+                        adoptar={adoptarBoton}
+                    />
+                </Col>
+            ]
             element = element.concat(rows)
-        }
+        })
 
         return element
     }
@@ -37,28 +49,44 @@ class Animales extends Component {
         })
     }
 
-    generateSelect = () =>{
+    generateSelect = () => {
         const handleSelectFunc = (val) =>
             this.handleSelect(val)
-            return <Select handleSelectF={handleSelectFunc}  />
+        return <Select handleSelectF={handleSelectFunc} />
     }
 
-    adoptar = (id) =>{
-        console.log('adoptar a : '+id)
+    adoptar = (id) => {
+        console.log('adoptar a : ' + id)
     }
-    
+
     render() {
+        console.log('animales', this.props)
         return (
-            <div>
+            <div className='container'>
                 <h1>Animales</h1>
                 {this.generateSelect()}
-                <Row style={{ pading: '5px' }}>
+                <div className='row no-gutters row-edge' style={{ pading: '5px' }}>
                     {this.generateCards()}
-                </Row>
+                </div>
 
             </div>
         );
     }
 }
+const actionCreators = {
+    obtenerAnimales
+}
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(actionCreators, dispatch)
+}
 
-export default Animales;
+const mapStateToProps = state => {
+    return {
+        animals: state.animalReducer.animals
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Animales)

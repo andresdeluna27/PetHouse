@@ -5,7 +5,7 @@ import { Row, Col, Input } from 'reactstrap';
 class AnimalSelec extends React.Component {
     render() {
         return (
-        <Row>
+        <div className='row no-gutters'>
             <Col lg='2'>
                 <Input type='select' name='select' id='exampleSelect'
                     onChange={e => this.props.handleSelectF(e.target.value)}>
@@ -14,7 +14,7 @@ class AnimalSelec extends React.Component {
                     <option value='otros'>otros</option>
                 </Input>
             </Col>
-        </Row>
+        </div>
         );
     }
 }
