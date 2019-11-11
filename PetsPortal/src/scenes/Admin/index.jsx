@@ -6,6 +6,7 @@ import { Input, FormGroup, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { agreagarPersona, agreagarAnimal } from '../../services/redux/personas/persona-action'
+import './formulario.css'
 
 class Admin extends Component {
     constructor(props) {
@@ -14,12 +15,12 @@ class Admin extends Component {
             type: 'persona',
             raza: 'perro',
             nombrePersona: '',
-            apellidoM:'',
-            apellidoP:'',
-            edadPersona:1,
-            nombre:'',
-            edad:1,
-            imagen:''
+            apellidoM: '',
+            apellidoP: '',
+            edadPersona: 1,
+            nombre: '',
+            edad: 1,
+            imagen: ''
         }
     }
 
@@ -67,10 +68,10 @@ class Admin extends Component {
             Nombre: this.state.nombrePersona,
             ApellidoP: this.state.apellidoP,
             ApellidoM: this.state.apellidoM,
-            Edad:this.state.edadPersona,
-            Domicilio:this.state.domiilio
+            Edad: this.state.edadPersona,
+            Domicilio: this.state.domiilio
         }
-        console.log('para agr',persona)
+        console.log('para agr', persona)
         this.props.agreagarPersona(persona)
     }
 
@@ -86,15 +87,23 @@ class Admin extends Component {
     }
 
     render() {
-        console.log('rom ',this.state)
+        console.log('rom ', this.state)
         return (
-            <div>
+            <div className='container fondo-form'>
                 <h1>Administrar</h1>
-                <Input type='select' name='menuSelect' id='menuSelect'
-                    onChange={e => this.handleSelect(e.target.value, true)} value={this.state.type}>
-                    <option value='persona'>persona</option>
-                    <option value='animal'>animal</option>
-                </Input>
+                <Row>
+                    <Col lg={{size:4}}>
+                    </Col>
+                    <Col lg={{size:4}}>
+                        <Input type='select' name='menuSelect' id='menuSelect'
+                            onChange={e => this.handleSelect(e.target.value, true)} value={this.state.type}>
+                            <option value='persona'>persona</option>
+                            <option value='animal'>animal</option>
+                        </Input>
+                    </Col>
+                    <Col lg={{size:4}}>
+                    </Col>
+                </Row>
                 <h2> {this.state.type}</h2>
                 <Row>
                     <Col sm={3}></Col>

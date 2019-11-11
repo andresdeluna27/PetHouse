@@ -4,29 +4,41 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace AnimalsPets.Services.AdopcionService
 {
     public class AdopcionService : IAdopcionService
     {
         SqlConnection Conn;
+        MySqlConnection MysqlCon;
         public AdopcionService()
         {
-            Conn = new SqlConnection("Data Source=FRT_FLUNA\\SQLEXPRESS;Initial Catalog=Refugio;Integrated Security=True");
+            //Conn = new SqlConnection("Data Source=FRT_FLUNA\\SQLEXPRESS;Initial Catalog=Refugio;Integrated Security=True");
+            //Conn = new SqlConnection("Data Source=nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;Initial Catalog=lhvbheof00bugh9n;User ID=rxpl4wsl9zkor14u;Password=dz9ox3gyrph6ppsj;Integrated Security=True");
+            Conn = new SqlConnection("Data Source=localhost:3306;Initial Catalog=prueba;User ID=root;Password=270596paCO;Integrated Security=True");
+            //"Data Source=;Initial Catalog=Animal;User ID=rxpl4wsl9zkor14u;Password=dz9ox3gyrph6ppsj;Pooling=True;MultipleActiveResultSets=True;"
+            string connetionString = null;
+            connetionString = "server=nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;database=lhvbheof00bugh9n;uid=rxpl4wsl9zkor14u;pwd=dz9ox3gyrph6ppsj;";
+            MysqlCon = new MySqlConnection(connetionString);
         }
 
         public int AdoptarAmigo(int owner, int id)
         {
+
             string sql = $@"UPDATE Animal SET OwnerId={owner} where Id = {id}";
             string updateSolicitud = $@"UPDATE Solicitudes SET Progress=1 WHERE OwnerId={owner} AND AnimalId={id}";
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
+                MysqlCon.Open();
+                MysqlCon.Close();
+                /*Conn.Open();
                 SqlCommand command = new SqlCommand(sql, Conn);
                 command.ExecuteNonQuery();
                 command.CommandText = updateSolicitud;
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();*/
+
             }
             catch (Exception e)
             {
@@ -43,9 +55,14 @@ namespace AnimalsPets.Services.AdopcionService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
+                /*Conn.Open();
                 SqlCommand command = new SqlCommand(sql, Conn);
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();*/
+                MysqlCon.Open();
+
+                MySqlCommand mycomand = new MySqlCommand(sql, MysqlCon);
+                mycomand.ExecuteReader();
+                MysqlCon.Close();
             }
             catch (Exception e)
             {
@@ -62,6 +79,7 @@ namespace AnimalsPets.Services.AdopcionService
             List<Exception> exceptions = new List<Exception>();
             try
             {
+                /*
                 Conn.Open();
                 SqlCommand command = new SqlCommand(ownerId, Conn);
                 SqlDataReader reader = command.ExecuteReader();
@@ -72,6 +90,18 @@ namespace AnimalsPets.Services.AdopcionService
                 reader.Close();
                 command.CommandText = sql;
                 command.ExecuteNonQuery();
+                Conn.Close();*/
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(ownerId, MysqlCon);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                int Id = Convert.ToInt32(reader["Id"]);
+                string sql = $@"INSERT INTO Solicitudes ( OwnerId, AnimalId, Progress, Fecha) VALUES 
+                            ({Id}, {animal}, {0}, '{DateTime.Now}')";
+                reader.Close();
+                command.CommandText = sql;
+                command.ExecuteNonQuery();
+                MysqlCon.Close();
             }
             catch (Exception e)
             {
@@ -90,9 +120,12 @@ namespace AnimalsPets.Services.AdopcionService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
+                /*Conn.Open();
                 SqlCommand command = new SqlCommand(sql, Conn);
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();*/
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(sql, MysqlCon);
+                MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     try
@@ -114,7 +147,7 @@ namespace AnimalsPets.Services.AdopcionService
 
                 reader.Close();
                 command.Dispose();
-                Conn.Close();
+                MysqlCon.Close();
 
 
             }

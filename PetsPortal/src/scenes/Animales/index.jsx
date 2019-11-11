@@ -6,6 +6,7 @@ import Select from './animalSelector'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { obtenerAnimales,solicitudAdoptar,elegirSolicitud,obtenerAnimalesPorRaza } from '../../services/redux/animales/animal-action'
+import './animales.css'
 
 class Animales extends Component {
     constructor(props) {
@@ -69,7 +70,7 @@ class Animales extends Component {
         console.log('animales', this.props)
         return (
             <div className='container fondo-animal'>
-                <h1>Animales</h1>
+                <h1>Animales Para Todos</h1>
                 {this.generateSelect()}
                 <div className='row no-gutters row-edge' style={{ pading: '5px' }}>
                     {this.generateCards()}

@@ -1,4 +1,5 @@
 ﻿using AnimalsPets.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,12 +11,16 @@ namespace AnimalsPets.Services.AnimalService
     public class AnimalService : IAnimalService
     {
         SqlConnection Conn;
+        MySqlConnection MysqlCon;
 
         public AnimalService()
         {
             
             //Conn = new SqlConnection("Data Source = FRT_FLUNA\\SQLEXPRESS; Initial Catalog = Animal;User ID=Website;Password=W3bsit3!2015; Integrated Security = SSPI");
             Conn = new SqlConnection("Data Source=FRT_FLUNA\\SQLEXPRESS;Initial Catalog=Refugio;Integrated Security=True");
+            string connetionString = null;
+            connetionString = "server=nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;database=lhvbheof00bugh9n;uid=rxpl4wsl9zkor14u;pwd=dz9ox3gyrph6ppsj;";
+            MysqlCon = new MySqlConnection(connetionString);
         }
         public IEnumerable<Animal> GetAnimals()
         {
@@ -24,9 +29,12 @@ namespace AnimalsPets.Services.AnimalService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
+                /*Conn.Open();
                 SqlCommand command = new SqlCommand(sql, Conn);
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();*/
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(sql, MysqlCon);
+                MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     try
@@ -69,9 +77,9 @@ namespace AnimalsPets.Services.AnimalService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
-                SqlCommand command = new SqlCommand(sql, Conn);
-                SqlDataReader reader = command.ExecuteReader();
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(sql, MysqlCon);
+                MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     try
@@ -117,9 +125,10 @@ namespace AnimalsPets.Services.AnimalService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
-                SqlCommand command = new SqlCommand(sql, Conn);
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(sql, MysqlCon);
                 command.ExecuteNonQuery();
+                MysqlCon.Close();
             }
             catch (Exception e)
             {
@@ -135,9 +144,10 @@ namespace AnimalsPets.Services.AnimalService
             List<Exception> exceptions = new List<Exception>();
             try
             {
-                Conn.Open();
-                SqlCommand command = new SqlCommand(sql, Conn);
+                MysqlCon.Open();
+                MySqlCommand command = new MySqlCommand(sql, MysqlCon);
                 command.ExecuteNonQuery();
+                MysqlCon.Close();
             }
             catch (Exception e)
             {
