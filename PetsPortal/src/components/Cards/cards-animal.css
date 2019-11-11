@@ -2,3 +2,25 @@
     margin-top: 15px;
     
 }
+
+.banner-img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+@media screen and (max-width: 355px) {
+    .banner-img {
+        max-width: 100%;
+  height: auto;
+    }
+
+}
+
+@media screen and (min-width: 356px) and (max-width: 500px) {
+    .banner-img {max-width: 100%;
+        height: auto;
+    }
+
+}

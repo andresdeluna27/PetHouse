@@ -64,12 +64,13 @@ class Admin extends Component {
 
     agreagarPersonaForm = () => {
         let persona = {
-            Nombre: this.state.nombre,
+            Nombre: this.state.nombrePersona,
             ApellidoP: this.state.apellidoP,
             ApellidoM: this.state.apellidoM,
             Edad:this.state.edadPersona,
             Domicilio:this.state.domiilio
         }
+        console.log('para agr',persona)
         this.props.agreagarPersona(persona)
     }
 

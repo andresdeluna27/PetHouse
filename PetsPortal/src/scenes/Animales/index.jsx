@@ -5,18 +5,18 @@ import { relative } from 'path';
 import Select from './animalSelector'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { obtenerAnimales,solicitudAdoptar,elegirSolicitud } from '../../services/redux/animales/animal-action'
+import { obtenerAnimales,solicitudAdoptar,elegirSolicitud,obtenerAnimalesPorRaza } from '../../services/redux/animales/animal-action'
 
 class Animales extends Component {
     constructor(props) {
         super(props)
         this.state = {
             max: 1,
-            titulo: 'perros'
+            titulo: 'perro'
         }
     }
     componentDidMount() {
-        this.props.obtenerAnimales()
+        this.props.obtenerAnimalesPorRaza(this.state.titulo)
     }
     generateCards = () => {
         const adoptarBoton = (ownerName,id) =>
@@ -45,6 +45,7 @@ class Animales extends Component {
     }
 
     handleSelect = (val) => {
+        this.props.obtenerAnimalesPorRaza(val)
         this.setState({
             titulo: val
         })
@@ -53,7 +54,7 @@ class Animales extends Component {
     generateSelect = () => {
         const handleSelectFunc = (val) =>
             this.handleSelect(val)
-        return <Select handleSelectF={handleSelectFunc} />
+        return <Select handleSelectF={handleSelectFunc} valor={this.state} />
     }
 
     adoptar = (ownerName,id) => {
@@ -81,7 +82,8 @@ class Animales extends Component {
 const actionCreators = {
     obtenerAnimales,
     solicitudAdoptar,
-    elegirSolicitud
+    elegirSolicitud,
+    obtenerAnimalesPorRaza
 }
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(actionCreators, dispatch)

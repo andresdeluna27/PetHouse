@@ -21,6 +21,27 @@ export const obtenerAnimales = () =>{
     }
 }
 
+export const obtenerAnimalesPorRaza = (raza) =>{
+    return async dispatch => {
+        try {
+            console.log('si llego')
+            let response = await getJsonRequest(`http://localhost:63479/api/animal/razas?raza=${raza}`)
+            await dispatch({
+                type: 'GET_ANIMALS',
+                animals: response
+            })
+            console.log('y salio')
+        } catch (error) {
+            dispatch({
+                type: 'ERR_GET',
+                getError: {
+                    status: true,
+                }
+            })
+        }
+    }
+}
+
 export const solicitudAdoptar = (body) =>{
     return async dispatch => {
         try {
