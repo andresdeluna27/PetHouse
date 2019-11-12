@@ -21,7 +21,7 @@ link: https://runnable.com/docker/install-docker-on-windows-10
 	
 	now the backend is ready!
 	
-* To run the react app just type the command
+* To run the react app just type the command at the Folder PetsPortal
 	=> npm start
 	
 	No you can navigate for the aplication
