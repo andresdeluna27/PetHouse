@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Route, Switch, Redirect, withRouter, NavLink, Link } from 'react-router-dom'
+import { Route, Switch, NavLink, Link } from 'react-router-dom'
 import Animales from '../Animales'
 import Home from '../Home'
 import Admin from '../Admin'

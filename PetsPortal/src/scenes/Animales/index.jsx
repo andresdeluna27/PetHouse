@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Card from '../../components/Cards'
-import { Row, Col, Input } from 'reactstrap'
-import { relative } from 'path';
+import { Col } from 'reactstrap'
 import Select from './animalSelector'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -40,6 +39,7 @@ class Animales extends Component {
                 </Col>
             ]
             element = element.concat(rows)
+            return data
         })
 
         return element
@@ -67,7 +67,6 @@ class Animales extends Component {
     }
 
     render() {
-        console.log('animales', this.props)
         return (
             <div className='container fondo-animal'>
                 <h1>Animales Para Todos</h1>

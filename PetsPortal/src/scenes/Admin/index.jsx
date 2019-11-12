@@ -71,7 +71,6 @@ class Admin extends Component {
             Edad: this.state.edadPersona,
             Domicilio: this.state.domiilio
         }
-        console.log('para agr', persona)
         this.props.agreagarPersona(persona)
         this.setState({
             nombrePersona: '',
@@ -98,7 +97,6 @@ class Admin extends Component {
     }
 
     render() {
-        console.log('rom ', this.state)
         return (
             <div className='container fondo-form'>
                 <h1>Administrar</h1>

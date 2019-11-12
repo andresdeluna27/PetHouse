@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Card, CardImg, CardText, CardBody,
+    Card, CardText, CardBody,
     CardTitle, CardSubtitle, Button,
     Input, Label, Progress
   } from 'reactstrap';
@@ -62,7 +62,6 @@ class CardGeneric extends Component {
         })
     }
     render() {
-        console.log(this.props,'soli')
         return (
             <div className={'card-board '+this.props.className}>
                 <Card onClick={e => this.setState(prevState =>{

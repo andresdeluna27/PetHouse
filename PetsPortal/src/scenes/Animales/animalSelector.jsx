@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Input } from 'reactstrap';
+import { Col, Input } from 'reactstrap';
 
 
 class AnimalSelec extends React.Component {
