@@ -4,7 +4,7 @@ export const obtenerAnimales = () =>{
     return async dispatch => {
         try {
             console.log('si llego')
-            let response = await getJsonRequest(`http://localhost:63479/api/animal`)
+            let response = await getJsonRequest(`http://localhost:80/api/animal`)
             await dispatch({
                 type: 'GET_ANIMALS',
                 animals: response
@@ -25,7 +25,7 @@ export const obtenerAnimalesPorRaza = (raza) =>{
     return async dispatch => {
         try {
             console.log('si llego')
-            let response = await getJsonRequest(`http://localhost:63479/api/animal/razas?raza=${raza}`)
+            let response = await getJsonRequest(`http://localhost:80/api/animal/razas?raza=${raza}`)
             await dispatch({
                 type: 'GET_ANIMALS',
                 animals: response
@@ -46,7 +46,7 @@ export const solicitudAdoptar = (body) =>{
     return async dispatch => {
         try {
             let params=`owner=${body.owner}&animal=${body.animal}`
-            let response = await postJsonRequest2(`http://localhost:63479/api/adopcion/solicitud?`+params)
+            let response = await postJsonRequest2(`http://localhost:80/api/adopcion/solicitud?`+params)
             await dispatch({
                 type: 'ADD_SOLICITUD',
                 correcto: response
@@ -66,7 +66,7 @@ export const elegirSolicitud = (body) =>{
     return async dispatch => {
         try{
             let params=`owner=${body.owner}&animal=${body.animal}`
-            let response = await postJsonRequest2(`http://localhost:63479/api/adopcion/final?`+params)
+            let response = await postJsonRequest2(`http://localhost:80/api/adopcion/final?`+params)
             await dispatch({
                 type: 'UPDATE_ANIMAL_OWNER',
                 correcto: response
@@ -85,7 +85,7 @@ export const elegirSolicitud = (body) =>{
 export const obtenerSolicitudes = (id) =>{
     return async dispatch => {
         try {
-            let response = await getJsonRequest(`http://localhost:63479/api/adopcion/solicitudes?animalId=${id}`)
+            let response = await getJsonRequest(`http://localhost:80/api/adopcion/solicitudes?animalId=${id}`)
             await dispatch({
                 type: 'GET_SOLICITUDES',
                 solicitudes: response

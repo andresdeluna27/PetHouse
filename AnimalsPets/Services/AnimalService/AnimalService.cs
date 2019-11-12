@@ -57,7 +57,7 @@ namespace AnimalsPets.Services.AnimalService
 
                 reader.Close();
                 command.Dispose();
-                Conn.Close();
+                MysqlCon.Close();
 
                 
             }
@@ -103,8 +103,7 @@ namespace AnimalsPets.Services.AnimalService
 
                 reader.Close();
                 command.Dispose();
-                Conn.Close();
-
+                MysqlCon.Close();
 
             }
             catch (Exception e)
