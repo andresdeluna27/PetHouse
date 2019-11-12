@@ -75,7 +75,7 @@ class CardGeneric extends Component {
                         <CardSubtitle>{'Edad:'}</CardSubtitle>
                         <CardText>{this.props.animal.edad}</CardText>
                         {this.state.hidden?(<sapan>Haz click para ver las personas interesadas<br/></sapan>):this.generarSolicitudes()}
-                        <Label for='owner'>Interesado</Label>
+                        <Label for='owner'>Interesado </Label>
                         <Input type='text' name='interesado' id='interesado' placeholder='' 
                         onChange={e => this.setState({
                             interesado: e.target.value

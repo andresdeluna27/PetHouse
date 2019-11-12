@@ -13,7 +13,7 @@ const FormAnimal = (props) => {
         <Input value={props.valores.edad} type='number' name='edad' id='edad' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
         <br/>
-        <Label for='exampleEmail'>Imagen</Label>
+        <Label for='exampleEmail'>Imagen (URL)</Label>
         <Input value={props.valores.imagen} type='text' name='imagen' id='imagen' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
       </FormGroup>

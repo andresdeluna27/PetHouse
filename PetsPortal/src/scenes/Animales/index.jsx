@@ -70,6 +70,7 @@ class Animales extends Component {
         return (
             <div className='container fondo-animal'>
                 <h1>Animales Para Todos</h1>
+                <br/>(primero date de alta en el modulo de 'Administrar' y después ingresa tu nombre en la caja de texto de tu animal deseado)
                 {this.generateSelect()}
                 <div className='row no-gutters row-edge' style={{ pading: '5px' }}>
                     {this.generateCards()}
