@@ -19,7 +19,7 @@ namespace AnimalsPets.Services.AdopcionService
             Conn = new SqlConnection("Data Source=localhost:3306;Initial Catalog=prueba;User ID=root;Password=270596paCO;Integrated Security=True");
             //"Data Source=;Initial Catalog=Animal;User ID=rxpl4wsl9zkor14u;Password=dz9ox3gyrph6ppsj;Pooling=True;MultipleActiveResultSets=True;"
             string connetionString = null;
-            connetionString = "server=nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;database=lhvbheof00bugh9n;uid=rxpl4wsl9zkor14u;pwd=dz9ox3gyrph6ppsj;";
+            connetionString = "server=nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;database=lhvbheof00bugh9n;uid=rxpl4wsl9zkor14u;pwd=dz9ox3gyrph6ppsj;Convert Zero Datetime=True";
             MysqlCon = new MySqlConnection(connetionString);
         }
 
@@ -97,7 +97,7 @@ namespace AnimalsPets.Services.AdopcionService
                 reader.Read();
                 int Id = Convert.ToInt32(reader["Id"]);
                 string sql = $@"INSERT INTO Solicitudes ( OwnerId, AnimalId, Progress, Fecha) VALUES 
-                            ({Id}, {animal}, {0}, '{DateTime.Now}')";
+                            ({Id}, {animal}, {0}, NOW())";
                 reader.Close();
                 command.CommandText = sql;
                 command.ExecuteNonQuery();
@@ -115,7 +115,7 @@ namespace AnimalsPets.Services.AdopcionService
         {
             List<Solicitud> res = new List<Solicitud>();
             string sql = @"SELECT s.*,p.Nombre FROM Solicitudes s
-                            join persona p on p.Id = s.OwnerId
+                            join Persona p on p.Id = s.OwnerId
                             WHERE Progress = 0 And AnimalId = "+id;
             List<Exception> exceptions = new List<Exception>();
             try

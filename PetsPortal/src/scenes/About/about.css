@@ -1,3 +1,12 @@
 .fondo{
     background-image: linear-gradient(#b3e6ff, white); 
 }
+
+.imagen{
+    text-align: center;
+    border: solid 1pt #D1FF33;
+}
+
+article{
+    margin-top: 10px;
+}

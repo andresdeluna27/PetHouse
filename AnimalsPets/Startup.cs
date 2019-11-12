@@ -24,6 +24,7 @@ namespace AnimalsPets
         }
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -31,6 +32,15 @@ namespace AnimalsPets
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<IAdopcionService, AdopcionService>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000",
+                                        "http://127.0.0.1:3000");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +54,7 @@ namespace AnimalsPets
             //var cors = new EnableCorsAttribute("http://localhost:5901", "*", "*");
             //config.EnableCors(cors);
             //app.UseWebApi(config);
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseMvc();
         }
     }

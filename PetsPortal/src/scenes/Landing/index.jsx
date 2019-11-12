@@ -11,8 +11,14 @@ class Landing extends Component {
     render() {
         return (
             <div>
-                <nav>Home</nav>
-                <NavLink tag={Link} to={'/'}>home</NavLink>
+                <div style={{background:'#D1FF33'}}>
+                
+                <NavLink tag={Link} to={'/'}>
+                    <img src="https://assets.website-files.com/5aec73392c95ede1c8424bc7/5b11afbd93e3453816a0cf4a_Favicon--256x256.png" 
+                    style={{width:'5%',position:'relative'}}
+                    alt=""/><span>HOME</span>
+                </NavLink>
+                </div>
                 <Switch>
                     <Route path='/animales' component={Animales} />
                     <Route exact path='/' component={Home}/>

@@ -13,7 +13,9 @@ class Home extends Component {
         let centros='https://akm-img-a-in.tosshub.com/indiatoday/images/bodyeditor/201812/andreas-dress-1076960-unsplash-770x3993.jpg';
         return (
             <div className='container fondo-home'>
-                <Row >show some love</Row>
+                <Row > 
+                    <h1>Welcome to the Animal Village</h1>
+                </Row>
                 <div className='row no-gutters row-edge' style={{ pading: '5px' }}>
                     <Col lg={{ size: 3 }} tag={Link} to={'/about'}>
                         <Card  title='Sobre Nosotros' imagen={about} bodyText='info...' />

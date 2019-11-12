@@ -23,7 +23,7 @@ class CardGeneric extends Component {
         }
     }
     componentDidMount(){
-        this.props.obtenerSolicitudes(this.state.id)
+        this.props.obtenerSolicitudes(this.props.animal.id)
     }
 
     componentWillReceiveProps(){
@@ -31,6 +31,7 @@ class CardGeneric extends Component {
             this.setState({
                 id:this.props.animal.id
             })
+            
         }
         if(this.props.solic!==undefined){
             this.setState({
