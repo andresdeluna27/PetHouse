@@ -13,7 +13,8 @@ link: https://runnable.com/docker/install-docker-on-windows-10
 * on the folder 'PetsPortal' install the react dependencies
 	=> npm install
 
-* Create the image for the docker container
+* Create the image for the docker container;
+	Go to AnimalsPets folder at top level and run:
 	=> docker build -t animalfinal:v1 .
 * Run the container with the composer doc
 	=> docker-compose up
@@ -30,5 +31,4 @@ link: https://runnable.com/docker/install-docker-on-windows-10
 
 */FALP
 
-Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
