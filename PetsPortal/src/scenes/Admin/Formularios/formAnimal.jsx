@@ -6,15 +6,15 @@ const FormAnimal = (props) => {
     <Form>
       <FormGroup>
         <Label for='exampleEmail'>Nombre</Label>
-        <Input type='text' name='nombre' id='nombre' placeholder='' 
+        <Input value={props.valores.nombre} type='text' name='nombre' id='nombre' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
         <br/>
         <Label for='exampleEmail'>Edad</Label>
-        <Input type='number' name='edad' id='edad' placeholder='' 
+        <Input value={props.valores.edad} type='number' name='edad' id='edad' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
         <br/>
         <Label for='exampleEmail'>Imagen</Label>
-        <Input type='text' name='imagen' id='imagen' placeholder='' 
+        <Input value={props.valores.imagen} type='text' name='imagen' id='imagen' placeholder='' 
         onChange={e => props.changeValues(e.target.name,e.target.value)} />
       </FormGroup>
       <Button onClick={e => props.agregar()}>Agregar</Button>

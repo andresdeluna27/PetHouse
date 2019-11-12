@@ -1,0 +1,16 @@
+version: '3'
+services:
+    # search engine
+    apinet:
+        image: animalhouse:v3
+        container_name: apinet
+        environment:
+            - discovery.type=single-node
+            - http.port=80
+            - http.cors.enabled=true
+            - http.cors.allow-origin=*
+            - http.cors.allow-methods=OPTIONS,HEAD,GET,POST,PUT,DELETE
+            - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+            - http.cors.allow-credentials=true
+        ports:
+            - '80:80'

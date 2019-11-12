@@ -47,12 +47,12 @@ class Admin extends Component {
         const getValuesFrom = (property, value) =>
             this.getFormValues(property, value)
         return this.state.type === 'persona' ?
-            <FormularioP changeValues={getValuesFrom} agregar={agreagarPersonaBtn} />
+            <FormularioP valores={this.state} changeValues={getValuesFrom} agregar={agreagarPersonaBtn} />
             :
             (
                 <FormGroup>
                     {this.generateSelect()}
-                    <FormularioA changeValues={getValuesFrom} agregar={agreagarAnimalBtn} />
+                    <FormularioA valores={this.state} changeValues={getValuesFrom} agregar={agreagarAnimalBtn} />
                 </FormGroup>
             )
     }
@@ -73,6 +73,12 @@ class Admin extends Component {
         }
         console.log('para agr', persona)
         this.props.agreagarPersona(persona)
+        this.setState({
+            nombrePersona: '',
+            apellidoM: '',
+            apellidoP: '',
+            edadPersona: ''
+        })
     }
 
     agreagarAnimalForm = () => {
@@ -84,6 +90,11 @@ class Admin extends Component {
             CentroId: 5 //sera random
         }
         this.props.agreagarAnimal(animal)
+        this.setState({
+            nombre: '',
+            edad: '',
+            imagen: ''
+        })
     }
 
     render() {
